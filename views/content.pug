@@ -8,6 +8,8 @@ html
     if(user)
       h1 Hi, #{user.name}
     else
-      a.button-sign(href="/auth/google") Sign up
-      a.button-cont(href= page) Continue
+      container
+        
+        a.button-sign(href="/auth/google") Sign up
+        a.button-cont(href= page) Continue
     include ./footer.pug 
