@@ -17,7 +17,7 @@ passport.use(
     {
       clientID: config.GOOGLE_CLIENT_ID,
       clientSecret: config.GOOGLE_CLIENT_SECRET,
-      callbackURL: config.CALLBACK_URL
+      callbackURL: config.CALLBACK_URL,
     },
   function(accessToken, refreshToken, profile, cb)
     {
@@ -52,15 +52,19 @@ app.get("/logged", function(req, res) {
   res.render("logged", { user: googleProfile });
 });
 
+app.get("/failure", function(req, res) {
+  res.render("failure", { user: googleProfile });
+});
+
 // PASSPORT ROUTES
 app.get("/auth/google",
   passport.authenticate("google", {
     scope : ["profile", "email"]
   }));
-app.get("auth/google/callback",
+app.get("/auth/google/callback",
   passport.authenticate("google", {
     successRedirect : "/logged",
-    failureRedirect: "/"
+    failureRedirect: "/failure"
   }));
 
 app.listen(3000);
